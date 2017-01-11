@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ url_for('static', filename='favicon.ico') }}" rel="shortcut icon" type="image/x-icon" />
+        <style type="text/css">
+            #button{
+                width: 12em;
+                height: 3em;
+
+            }
+            #epistasis{
+                display: none;
+            }
+            #epistasis_radio:checked ~ #epistasis {
+                display: block;
+            }
+            #indomtext{
+                display: none;
+            }
+            #indomcheck:checked ~ #indomtext {
+                display: block;
+
+        </style>
+
+        <title>Punnett square</title>
+    </head>
+    <body>
+        <h3>Punnett square solver online</h3>
+        <form method="POST">
+            <input type="text" name="first_genotype" placeholder="AaBb" required pattern="[A-Za-z]{4}" style="border-radius: 3px"> First genotype</input><br><br>
+            <input type="text" name="second_genotype" placeholder="AaBb" required pattern="[A-Za-z]{4}" style="border-radius: 3px"> Second genotype</input><br><br>
+            <h4>Epistasis</h4>
+            <input type="radio" id="epistasis_radio" name="epistasis" value="r">Recessive</input>
+            <input type="radio" id="epistasis_radio" name="epistasis" value="D">Dominance</input>
+            <input type="radio" name="epistasis" checked value="n">None</input><br>
+            <input type="text" placeholder="A,a" id="epistasis" pattern="[A-Za-z]" name="ep_input" style="border-radius: 3px"></input><br>
+            <h4>Incomplete dominance</h4>
+            <input type="radio" id="indomcheck" name="indom" value="y">Yes</input>
+            <input type="radio" name="indom" value="n" checked>No</input><br>
+            <input type="text" placeholder="Aa,Bb,AaBb"id="indomtext" pattern="[A-Za-z]{0,5}" name="indom_input" style="border-radius: 3px"></input><br>
+            <p>
+                <input type="submit" id="button" value="Solve"></input>
+                <input type="reset" id="button" value="Clear"></input>
+            </p>
+        </form><br>
+
+
+        <p>
+            {{first}}  {{second}}
+
+        </p>
+        <table>
+            {% for row in table %}
+            <tr>
+            {% for item in row %}
+            <td>{{ item }}</td>
+            {%  endfor%}
+            </tr>
+            {%  endfor%}
+        </table>
+        <p>
+        {{gen}}<br>
+        {% for key in genotypes %}
+            {{key}}:{{genotypes[key]}}
+        {% endfor %}
+        </p>
+        <p>
+        {{fen}}<br>
+        {% for key in phenotypes %}
+            {{key}}:{{phenotypes[key]}}
+        {% endfor %}
+        </p>
+        <p><a href="https://vk.com/punnett">Написать разработчику</a></p>
+
+
+    </body>
+</html>
