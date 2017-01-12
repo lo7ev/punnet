@@ -1,3 +1,3 @@
 # punnet
 Simple punnet square solver
-punnett.pythonanywhere.com
+[Visit it](punnett.pythonanywhere.com)
